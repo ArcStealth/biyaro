@@ -3,7 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geolocator_android/geolocator_android.dart' show AndroidSettings, ForegroundNotificationConfig;
-import 'package:permission_handler/permission_handler.dart' show Permission;
+import 'package:permission_handler/permission_handler.dart' as ph;
 import 'package:sensors_plus/sensors_plus.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 import '../models/trip.dart';
@@ -41,7 +41,7 @@ class Tracker extends ChangeNotifier {
       await Geolocator.openAppSettings();
       return 'Allow Location for Biyaro in Settings, then try again.';
     }
-    await Permission.notification.request(); // Android 13+: shows the tracking notification
+    await ph.Permission.notification.request(); // Android 13+: shows the tracking notification
 
     _engine = TripEngine();
     final settings = AndroidSettings(
